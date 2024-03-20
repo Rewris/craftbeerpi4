@@ -173,7 +173,7 @@ class MashStep(CBPiStep):
         await self.push_update()
 
         if self.cbpi.kettle is not None and self.timer is None:
-            self.timer = Timer(int(self.props.get("Timer",0)) *60 ,on_update=self.on_timer_update, on_done=self.on_timer_done)
+            self.timer = Timer(int(float(self.props.get("Timer",0)) *60), on_update=self.on_timer_update, on_done=self.on_timer_done)
         elif self.cbpi.kettle is not None:
             try:
                 if self.timer.is_running == True:
@@ -192,7 +192,7 @@ class MashStep(CBPiStep):
         await self.push_update()
 
     async def reset(self):
-        self.timer = Timer(int(self.props.get("Timer",0)) *60 ,on_update=self.on_timer_update, on_done=self.on_timer_done)
+        self.timer = Timer(int(float(self.props.get("Timer",0)) *60), on_update=self.on_timer_update, on_done=self.on_timer_done)
 
     async def run(self):
         while self.running == True:
@@ -230,7 +230,7 @@ class WaitStep(CBPiStep):
 
     async def on_start(self):
         if self.timer is None:
-            self.timer = Timer(int(float(self.props.Timer) * 60), on_update=self.on_timer_update, on_done=self.on_timer_done)
+            self.timer = Timer(int(float(self.props.Timer) * 60),on_update=self.on_timer_update, on_done=self.on_timer_done)
         self.timer.start()
 
     async def on_stop(self):
@@ -239,7 +239,7 @@ class WaitStep(CBPiStep):
         await self.push_update()
 
     async def reset(self):
-        self.timer = Timer(int(self.props.Timer) * 60, on_update=self.on_timer_update, on_done=self.on_timer_done)
+        self.timer = Timer(int(float(self.props.Timer) * 60), on_update=self.on_timer_update, on_done=self.on_timer_done)
 
     async def run(self):
         while self.running == True:
@@ -307,7 +307,7 @@ class ActorStep(CBPiStep):
         await self.push_update()
 
     async def reset(self):
-        self.timer = Timer(int(self.props.Timer) * 60, on_update=self.on_timer_update, on_done=self.on_timer_done)
+        self.timer = Timer(int(float(self.props.Timer) * 60), on_update=self.on_timer_update, on_done=self.on_timer_done)
 
     async def run(self):
         while self.running == True:
@@ -391,7 +391,7 @@ class BoilStep(CBPiStep):
             self.kettle.target_temp = float(self.props.get("Temp", 0))
 
         if self.cbpi.kettle is not None and self.timer is None:
-            self.timer = Timer(int(self.props.get("Timer", 0)) *60 ,on_update=self.on_timer_update, on_done=self.on_timer_done)
+            self.timer = Timer(int(float(self.props.get("Timer", 0)) *60), on_update=self.on_timer_update, on_done=self.on_timer_done)
 
         elif self.cbpi.kettle is not None:
             try:
@@ -423,7 +423,7 @@ class BoilStep(CBPiStep):
         await self.push_update()
 
     async def reset(self):
-        self.timer = Timer(int(self.props.get("Timer", 0)) *60 ,on_update=self.on_timer_update, on_done=self.on_timer_done)
+        self.timer = Timer(int(float(self.props.get("Timer", 0)) *60), on_update=self.on_timer_update, on_done=self.on_timer_done)
 
     async def run(self):
         if self.first_wort_hop_flag == False and self.first_wort_hop == "Yes":
